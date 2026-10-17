@@ -148,7 +148,7 @@ Two ideas address this:
 28. Vu et al. (2018). WSN in landslide monitoring system with remote data management. *Measurement*. DOI:10.1016/j.measurement.2018.01.002
 29. Kumar M. et al. (2022). Accurate IoT Based Slope Instability Sensing System for Landslide Detection. *IEEE Sensors J.* DOI:10.1109/jsen.2022.3189903
 30. Joshi et al. (2023). WSN-Based Smart Landslide Monitoring Device (SMARTMODE). *IEEE Trans. Instrum. Meas.* DOI:10.1109/tim.2023.3269746
-31. **Idris et al. (n.d.). Smart Monitoring and Warning Landslide System using IoT (Bukit Bauk Dungun, MALAYSIA).**
+31. ~~Idris et al. (n.d.). Smart Monitoring and Warning Landslide System using IoT (Bukit Bauk Dungun, MALAYSIA).~~ — **excluded from the manuscript's citation set, see Section 4.4 update below.**
 
 #### Cluster B — Rainfall-Induced Landslide Threshold/Prediction Models (n=18)
 *Role: defines the hazard-signal dynamics (rainfall→instability lag) that the self-powering and duty-brokering design must track.*
@@ -318,7 +318,9 @@ Two ideas address this:
 - [ISSN Portal record for Archives for Technical Sciences](https://portal.issn.org/resource/issn/2233-0046)
 - [EBSCO listing for Archives for Technical Sciences](https://openurl.ebsco.com/journals/journals-A/journal-18404855.html)
 
-**Net effect:** 3 items dropped (#80, #85, #106); 1 item retained with caution flag (#65). **Final verified reference set: 147 of 150 screened items.**
+**Net effect (original screening):** 3 items dropped (#80, #85, #106); 1 item retained with caution flag (#65). **Final verified reference set at this stage: 147 of 150 screened items.**
+
+**Update — systematic CrossRef DOI verification pass (post-manuscript-draft):** every DOI in the 146-item manuscript citation set (147 minus item #65, already excluded from citable claims per the caution above) was checked against the CrossRef API. 145 of 146 resolved correctly, and all 9 flagged "title mismatches" were manually confirmed, by inspection, to be the same paper under an abbreviated title used in this log — not wrong or conflated citations. **Item #31 (Idris et al., Bukit Bauk Dungun) has no DOI and could not be independently re-verified**: two separate targeted web searches for the paper (by title/location, and by specific technical details — NodeMCU/ESP8266, Blynk, rainfall/vibration/soil-moisture sensors) failed to locate a resolvable identifier or stable source link, despite the record itself having appeared in the original live Consensus/Semantic Scholar aggregator search (i.e., it is not a fabricated record — it is a real but currently unverifiable one). Consistent with how #80, #85, and #106 were already handled (dropped rather than caveated, when independent re-verification was not achievable), item #31 is now also excluded from the manuscript's citation set. **Final citable set for the manuscript: 145 of 150 screened items.** The manuscript's Related Work (Section 2.1) and verification discussion (Section 6.4) were updated accordingly — the specific claim about a Bukit Bauk Dungun deployment was removed rather than left attributed to an unverifiable source.
 
 **Evidence-tier grading** (discipline-relative for design-science/engineering research — top tier is *prototype built + field/lab validated*, not RCT):
 
