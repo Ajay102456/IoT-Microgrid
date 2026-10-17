@@ -1,0 +1,32 @@
+# Third-party copyrighted reference PDFs - not redistributed
+Papers/
+
+# Raw third-party datasets - see Data Availability Statement in the manuscript
+# for original sources (Mendeley Data DOIs, NASA POWER API). Not redistributed
+# here to keep the repository small; scripts to re-fetch them are included.
+Data/piezo_harvester_y4cmrsdv9f/
+Data/kl_solar_irradiance_bgch4tw79k/
+Data/nasa_power_corridor/*.json
+
+# LaTeX build artifacts
+LaTeX/*.aux
+LaTeX/*.log
+LaTeX/*.out
+LaTeX/*.bbl
+LaTeX/*.blg
+LaTeX/*.synctex.gz
+LaTeX/compile_log*.txt
+LaTeX_blind/*.aux
+LaTeX_blind/*.log
+LaTeX_blind/*.out
+LaTeX_blind/*.bbl
+LaTeX_blind/*.blg
+LaTeX_blind/*.synctex.gz
+LaTeX_blind/compile_blind*.txt
+
+# Misc scratch files from data exploration
+Data/_scripts/*.json
+Data/_scripts/*.txt
+!Data/_scripts/verified_refs.txt
+Data/_scripts/*.pdf
+Data/_scripts/__pycache__/

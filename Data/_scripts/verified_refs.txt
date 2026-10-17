@@ -1,0 +1,146 @@
+[1] (orig#1) El Houssaini et al. (2022). Location-Aware IoT-Enabled WSNs for Landslide Early Warning. *Electronics*. DOI:10.3390/electronics11233971
+[2] (orig#2) Giri et al. (2019). WSN System for Landslide Monitoring and Warning. *IEEE Trans. Instrum. Meas.* DOI:10.1109/tim.2018.2861999
+[3] (orig#3) Rani et al. (2025). IoT-Enabled Real-Time Landslide Monitoring using Waterbody Sensors. *ICTMIM 2025*. DOI:10.1109/ictmim65579.2025.10988011
+[4] (orig#4) Gowtham et al. (2026). Low-Power LoRaWAN IoT Landslide EWS with Random Forest. *ICAISS 2026*. DOI:10.1109/icaiss68683.2026.11525861
+[5] (orig#5) Amirthavarshini et al. (2025). Harnessing LoRa for Real-Time Landslide Monitoring in Kerala. *Geoscience Frontiers*. DOI:10.1016/j.gsf.2025.102242
+[6] (orig#6) Souza et al. (2022). IoT-Based System for Landslides Warnings Using Real Time Slope Monitoring. *COTB'22*. DOI:10.14210/cotb.v13.p126-133
+[7] (orig#7) D. J. et al. (2025). I-ELWS: IoT Driven Early Landslide Warning System. *ETNCC 2025*. DOI:10.1109/etncc66224.2025.11299651
+[8] (orig#8) P. C. et al. (2021). Real-time landslide EWS through low cost soil and rainfall sensors. *Materials Today: Proceedings*. DOI:10.1016/j.matpr.2021.02.456
+[9] (orig#9) Chaulya et al. (2024). Landslide monitoring and prediction system using geosensors and WSN. *Discover Geoscience*. DOI:10.1007/s44288-024-00007-3
+[10] (orig#10) Susanto et al. (2024). Landslide Monitoring and Warning System Based on WSN. *ELKHA*. DOI:10.26418/elkha.v16i2.83489
+[11] (orig#11) Thein et al. (2020). Real-Time Monitoring and EWS for Landslide Preventing in Myanmar. *GCCE 2020*. DOI:10.1109/gcce50665.2020.9291809
+[12] (orig#12) Ramesh (2009). Real-Time WSN for Landslide Detection. *SensorComm 2009*. DOI:10.1109/sensorcomm.2009.67
+[13] (orig#13) Devi (2025). Developing a Low-Cost Landslide EWS using IoT and Sensor Networks. *ICSCSS 2025*. DOI:10.1109/icscss64956.2025.11501071
+[14] (orig#14) Gamperl et al. (2021). IoT Geosensor Network for Cost-Effective LEWS (Inform@Risk, Colombia). *Sensors*. DOI:10.3390/s21082609
+[15] (orig#15) Mahfudh et al. (2026). Low-Cost IoT-Based Landslide EWS. *CENTIVE Proceedings*. DOI:10.20895/centive.v2025i1.562
+[16] (orig#16) Rawat et al. (2024). LANDSLIDE MONITOR: a real-time landslide monitoring system. *Environ. Earth Sci.* DOI:10.1007/s12665-024-11526-0
+[17] (orig#17) Galley et al. (2017). WSN Based Landslide Detection and EWS. *Zorig Melong*. DOI:10.17102/zmv3.i1.006
+[18] (orig#18) Abraham et al. (2020). IoT-Based Geotechnical Monitoring, Darjeeling Himalayas. *Sensors*. DOI:10.3390/s20092611
+[19] (orig#19) Das et al. (2020). Real-Time Threshold-based Landslide Prediction using WSN. *ICCE-Taiwan 2020*. DOI:10.1109/icce-taiwan49838.2020.9258181
+[20] (orig#20) Ramesh et al. (2017). WSNs for Early Warning of Landslides: Decade Long Deployment. DOI:10.1007/978-3-319-53487-9_4
+[21] (orig#21) Ali et al. (2012). Development of WSN for slope monitoring (Hulu Langat, MALAYSIA, 2011 landslide, 16 fatalities). *ICIAS 2012*. DOI:10.1109/icias.2012.6306203
+[22] (orig#22) Ragnoli et al. (2023). WSN-Based Rockfall and Landslide Monitoring Systems: A Review. *Sensors*. DOI:10.3390/s23167278
+[23] (orig#23) Bagwari et al. (2021). Low-Cost Sensor and LoRaWAN Opportunities for Landslide Monitoring: A Review. *IEEE Access*. DOI:10.1109/access.2021.3137841
+[24] (orig#24) Jeong et al. (2019). Effectiveness of a WSN System for Landslide Monitoring (Seoul). *IEEE Access*. DOI:10.1109/access.2019.2960570
+[25] (orig#25) Marino et al. (2023). IoT-Based Low-Cost Sensor Network for Hydrological Monitoring of Landslide-Prone Areas. *Sensors*. DOI:10.3390/s23042299
+[26] (orig#26) Debnath et al. (2025). Smart IoT-Based Distributed System for Remote Detection of Slope Movements (highway embankments). *ICNC 2025*. DOI:10.1109/icnc64010.2025.10993553
+[27] (orig#27) Ahmed et al. (2016). Real-time monitoring of partially stable slopes using WSN. *IC-GET 2016*. DOI:10.1109/get.2016.7916638
+[28] (orig#28) Vu et al. (2018). WSN in landslide monitoring system with remote data management. *Measurement*. DOI:10.1016/j.measurement.2018.01.002
+[29] (orig#29) Kumar M. et al. (2022). Accurate IoT Based Slope Instability Sensing System for Landslide Detection. *IEEE Sensors J.* DOI:10.1109/jsen.2022.3189903
+[30] (orig#30) Joshi et al. (2023). WSN-Based Smart Landslide Monitoring Device (SMARTMODE). *IEEE Trans. Instrum. Meas.* DOI:10.1109/tim.2023.3269746
+[31] (orig#31) Idris et al. (n.d.). Smart Monitoring and Warning Landslide System using IoT (Bukit Bauk Dungun, MALAYSIA).
+[32] (orig#32) Piciullo et al. (2017). Threshold-based regional EW model for rainfall-induced landslides. *Landslides*. DOI:10.1007/s10346-016-0750-2
+[33] (orig#33) Liu et al. (2024). Regional EW model based on slope unit, Chongqing. *Engineering Geology*. DOI:10.1016/j.enggeo.2024.107464
+[34] (orig#34) Dou et al. (2024). Regional dynamic EW model, Fujian. *Geomatics, Nat. Hazards and Risk*. DOI:10.1080/19475705.2024.2435510
+[35] (orig#35) Guzzetti et al. (2024). Landslide predictions through combined rainfall threshold models. *Landslides*. DOI:10.1007/s10346-024-02340-7
+[36] (orig#36) Huang et al. (2022). Regional rainfall-induced landslide hazard warning based on susceptibility mapping. *Geomorphology*. DOI:10.1016/j.geomorph.2022.108236
+[37] (orig#37) Zhang et al. (2026). Dynamic EW Model Coupling Slope Units and Rainfall Thresholds, Jinyang. *Geosciences*. DOI:10.3390/geosciences16090367
+[38] (orig#38) Cao et al. (2022). Hourly shallow landslide warning model combining susceptibility and rainfall threshold. *J. Mountain Sci.* DOI:10.1007/s11629-022-7370-1
+[39] (orig#39) Song et al. (2025). Refined meteorological EW based on temporal probability model. *Chinese J. Rock Mech. Eng.* DOI:10.3724/1000-6915.jrme.2024.0805
+[40] (orig#40) Wang et al. (2026). Dynamic EW model based on refined threshold analysis, Tanjiawan. *PLOS One*. DOI:10.1371/journal.pone.0339689
+[41] (orig#41) Zhan et al. (2022). EW model and model test verification of rainfall-induced shallow landslide. *Bull. Eng. Geol. Environ.* DOI:10.1007/s10064-022-02827-4
+[42] (orig#42) Nocentini et al. (2023). Optimization of rainfall thresholds through false alarm reduction. *Landslides*. DOI:10.1007/s10346-023-02176-7
+[43] (orig#43) Sun et al. (2024). Probabilistic thresholds for regional rainfall induced landslides. *Computers and Geotechnics*. DOI:10.1016/j.compgeo.2023.106040
+[44] (orig#44) Naidu et al. (2017). EWS for shallow landslides using rainfall threshold and slope stability analysis. *Geoscience Frontiers*. DOI:10.1016/j.gsf.2017.10.008
+[45] (orig#45) Dou et al. (2023). Rainfall EW threshold and spatial distribution in China. *Rock Mechanics Bulletin*. DOI:10.1016/j.rockmb.2023.100056
+[46] (orig#46) Dixit et al. (2024). Numerical-model-derived I-D thresholds for debris flows, Himalayan catchment. *NHESS*. DOI:10.5194/nhess-24-465-2024
+[47] (orig#47) Lee et al. (2021). Optimal rainfall thresholds for LEWS, Chuncheon, Korea. *Landslides*. DOI:10.1007/s10346-020-01603-3
+[48] (orig#48) Wang et al. (2026). Physical-based rainfall landslide prediction model from slope-unit I-D curves. *NHESS*. DOI:10.5194/nhess-26-2367-2026
+[49] (orig#49) Sarkar et al. (2023). Event-duration rainfall threshold model, Uttarkashi, Himalayas. *Int. J. Earth Sci.* DOI:10.1007/s00531-023-02337-y
+[50] (orig#50) Li et al. (2026). Sustained Self-Powered Real-Time Vibration Monitoring via Nonlinear Harvesting. *Advanced Science*. DOI:10.1002/advs.76967
+[51] (orig#51) Rubeš et al. (2021). Self-powered wireless vibration sensor node using vibration energy harvester. *Mech. Syst. Signal Process.* DOI:10.1016/j.ymssp.2021.107890
+[52] (orig#52) Izhar et al. (2023). Hybrid acoustic, vibration, and wind energy harvester for self-powered WSN. *Energy Conversion and Management*. DOI:10.1016/j.enconman.2022.116635
+[53] (orig#53) Wang et al. (2024). Sensor-enabled piezoelectric geocable–geogrid for slope rehabilitation and monitoring. *Engineering Geology*. DOI:10.1016/j.enggeo.2024.107780
+[54] (orig#54) Wang et al. (2026). Reinforcement and microseismic monitoring of slopes with self-sensing smart geosynthetic. *Geosynthetics International*. DOI:10.1680/jgein.25.00212
+[55] (orig#55) Rigo et al. (2024). Piezoelectric Sensors as Energy Harvesters for Ultra Low-Power IoT. *Sensors*. DOI:10.3390/s24082587
+[56] (orig#56) Wang et al. (2024). Self-sustained/self-wakeup wireless vibration sensors, hybrid harvesting. *Applied Energy*. DOI:10.1016/j.apenergy.2023.122207
+[57] (orig#57) Yang et al. (2025). Hybrid multiple-layer piezoelectric-solar harvester for self-powered sensing. *Sustainable Energy Technologies and Assessments*. DOI:10.1016/j.seta.2024.104157
+[58] (orig#58) Li et al. (2021). Piezoelectric Energy Harvesting: Materials, Structures, Applications. *Small Structures*. DOI:10.1002/sstr.202100128
+[59] (orig#59) Ng et al. (2005). Sensitivity Analysis and Energy Harvesting for a Self-Powered Piezoelectric Sensor. *J. Intelligent Material Systems and Structures*. DOI:10.1177/1045389x05053151
+[60] (orig#60) Lo et al. (2022). Self-powered SECE piezoelectric harvesting from shock excitations. *Mech. Syst. Signal Process.* DOI:10.1016/j.ymssp.2022.109123
+[61] (orig#61) Biswal et al. (2024). Self-Powered Accelerometer Using Circular Hole Piezo Harvester. *IEEE Sensors Letters*. DOI:10.1109/lsens.2024.3485540
+[62] (orig#62) Kuang et al. (2021). Strongly coupled piezoelectric harvesters for self-powered condition monitoring. *Energy Conversion and Management*. DOI:10.1016/j.enconman.2021.114129
+[63] (orig#63) Zou (2023). Piezoelectric self-powered wireless sensor in vibration environment monitoring. *Results in Engineering*. DOI:10.1016/j.rineng.2023.101492
+[64] (orig#64) Das Mahapatra et al. (2021). Piezoelectric Materials for Energy Harvesting and Sensing: Roadmap. *Advanced Science*. DOI:10.1002/advs.202100864
+[65] (orig#66) Lepipas et al. (2024). Miniature water flow harvester, Savonius-type microturbine. *Smart Materials and Structures*. DOI:10.1088/1361-665x/ad1c3f
+[66] (orig#67) Guiffard et al. (2021). Self-powered wireless sensor with flexible aero-piezoelectric harvester. *Renewable Energy*. DOI:10.1016/j.renene.2021.11.113
+[67] (orig#68) Zhang et al. (2024). Triboelectric-EM hybrid generator, Savonius flapping wing, low-velocity water flow. *Applied Energy*. DOI:10.1016/j.apenergy.2023.122512
+[68] (orig#69) Rahman et al. (2025). Survey of flow-based energy harvesters for sustainable WSN nodes. *J. Renewable and Sustainable Energy*. DOI:10.1063/5.0237597
+[69] (orig#70) Zhao et al. (2021). Hydrokinetic piezoelectric harvesting by wake-induced vibration. *Energy*. DOI:10.1016/j.energy.2020.119722
+[70] (orig#71) Kamenar et al. (2016). Harvesting river flow energy for WSN technology (GOLDFISH project). *Microsystem Technologies*. DOI:10.1007/s00542-015-2778-y
+[71] (orig#72) Li et al. (2022). Self-powered wireless water-monitoring sensor, electromagnetic-pendulum harvester. *Energy*. DOI:10.1016/j.energy.2022.123883
+[72] (orig#73) Vijayaregunathan et al. (2024). Harvesting hydraulic energy for self-sustainable IoT flow measurement. *Energy Sources Part A*. DOI:10.1080/15567036.2024.2334922
+[73] (orig#74) Yunus et al. (2026). Design of a Wireless Sensor Node Powered by Kinetic Energy Harvesters. *Applied Research*. DOI:10.1002/appl.70124
+[74] (orig#75) Zhou et al. (2026). Small-scale water energy harvesting for sustainably-powered distributed electronics. *Communications Materials*. DOI:10.1038/s43246-026-01137-6
+[75] (orig#76) Sarker et al. (2024). Micro energy harvesting for IoT platform: Review. *Heliyon*. DOI:10.1016/j.heliyon.2024.e27778
+[76] (orig#77) Hafizh et al. (2023). Vortex-induced-vibration self-tunable airfoil piezoelectric harvester for underwater sensing. *Ocean Engineering*. DOI:10.1016/j.oceaneng.2022.113467
+[77] (orig#78) Azevedo et al. (2012). Energy harvesting from wind and water for autonomous WSN nodes. *IET Circuits Devices Syst.* DOI:10.1049/iet-cds.2011.0287
+[78] (orig#79) Williams et al. (2021). Survey of Energy Harvesting Technologies for WSNs. *IEEE Access*. DOI:10.1109/access.2021.3083697
+[79] (orig#81) Ragnoli et al. (2020). Autonomous Low-Power LoRa-Based Flood-Monitoring System. *J. Low Power Electronics and Applications*. DOI:10.3390/jlpea10020015
+[80] (orig#82) Tsakmakis et al. (2022). Adaptive LoRaWAN MAC Protocol for Event Detection Applications. *Sensors*. DOI:10.3390/s22093538
+[81] (orig#83) Pan et al. (2021). UAV-Aided Emergency Environmental Monitoring, LoRa Mesh. *IEEE IoT Journal*. DOI:10.1109/jiot.2021.3095494
+[82] (orig#84) Sendra et al. (2020). LoRaWAN Network for Fire Monitoring in Rural Environments. *Electronics*. DOI:10.3390/electronics9030531
+[83] (orig#86) Ragnoli et al. (2022). LoRa-Based WSN for Rockfall and Landslide Monitoring, Pantelleria Island. *J. Low Power Electronics and Applications*. DOI:10.3390/jlpea12030047
+[84] (orig#87) Wu et al. (2023). Low-Cost Low-Power LoRa Mesh Network for Large-Scale Environmental Sensing (CottonCandy). *IEEE IoT Journal*. DOI:10.1109/jiot.2023.3270237
+[85] (orig#88) Finochietto et al. (2022). Reducing Operational Expenses of LoRaWAN-Based IoRT Applications. *Sensors*. DOI:10.3390/s22207778
+[86] (orig#89) Bagwari et al. (2022). Disaster Monitoring based on IoT and Long Range Assisted Framework. *J. Physics: Conf. Series*. DOI:10.1088/1742-6596/2327/1/012020
+[87] (orig#90) Ragnoli et al. (2022). Flood monitoring: LoRa-based case study, L'Aquila. *PRIME 2022*. DOI:10.1109/prime55000.2022.9816747
+[88] (orig#91) Abdul Latiff (2019). Environmental Monitoring System Based on LoRa Technology in Island. *ICSigSys 2019*. DOI:10.1109/icsigsys.2019.8811066
+[89] (orig#92) Chapungo et al. (2025). LoRaWAN Connectivity Reliability in Remote Rural Areas of Mozambique (source of the ~89% PDR lossy-link finding used in Phase 3 synthesis). *Sensors*. DOI:10.3390/s25196027
+[90] (orig#93) Zhao et al. (2023). Forest IoT Using LPWAN, Solar-Powered Micro-Weather Station. *Sensors*. DOI:10.3390/s23104809
+[91] (orig#94) Tamang et al. (2022). Reliable Low-Latency LoRaWAN Solution for Environmental Monitoring at Major Accident Risk Sites. *Sensors*. DOI:10.3390/s22062372
+[92] (orig#95) Liya et al. (2026). Energy efficient cyber-physical control of renewable microgrids, edge-AI, blockchain. *Scientific Reports*. DOI:10.1038/s41598-026-50169-y
+[93] (orig#96) Silva et al. (2023). IoT-based EMS for AC microgrids with grid and security constraints. *Applied Energy*. DOI:10.1016/j.apenergy.2023.120904
+[94] (orig#97) Wu et al. (2024). Microgrids EM considering net-zero energy, IoT digital twin. *Sustainable Energy Technologies and Assessments*. DOI:10.1016/j.seta.2024.103621
+[95] (orig#98) Cicceri et al. (2023). Deep Learning-Driven Self-Conscious Distributed CPS for Renewable Energy Communities. *Sensors*. DOI:10.3390/s23094549
+[96] (orig#99) Asef et al. (2023). SIEMS: Secure Intelligent EMS for Industrial IoT Applications. *IEEE Trans. Industrial Informatics*. DOI:10.1109/tii.2022.3165890
+[97] (orig#100) Tasmant et al. (2025). Review of ML and IoT-based EMS for AC microgrids. *Comput. Electr. Eng.* DOI:10.1016/j.compeleceng.2025.110563
+[98] (orig#101) Lee & Wang (2024). A Cyber-Physical Testbed for IoT Microgrid Design and Validation [PRIMARY REFERENCE PAPER]. *Electronics*. DOI:10.3390/electronics13071181
+[99] (orig#102) Albarakati et al. (2022). Microgrid energy management and monitoring systems: A comprehensive review. *Frontiers in Energy Research*. DOI:10.3389/fenrg.2022.1097858
+[100] (orig#103) Xu et al. (2021). Blockchain-based secure energy policy and management of renewable smart microgrids. *Sustainable Cities and Society*. DOI:10.1016/j.scs.2021.103010
+[101] (orig#104) Sitharthan et al. (2023). Smart microgrid with IoT for energy management (PV/Wind/Piezo hybrid). *Comput. Electr. Eng.* DOI:10.1016/j.compeleceng.2022.108556
+[102] (orig#105) Mallala et al. (2025). IoT-enabled community microgrid EM with battery degradation consideration. *J. Energy Storage*. DOI:10.1016/j.est.2024.114739
+[103] (orig#107) Samanta et al. (2020). IoT-based smart EM in VRFB-integrated bio-solar microgrid. *J. Energy Storage*. DOI:10.1016/j.est.2020.101967
+[104] (orig#108) Aljafari et al. (2022). Optimization of DC, AC, Hybrid AC/DC Microgrid-Based IoT Systems: A Review. *Energies*. DOI:10.3390/en15186813
+[105] (orig#109) Sedhom et al. (2021). IoT-based optimal demand side management for smart microgrid. *Int. J. Electrical Power & Energy Systems*. DOI:10.1016/j.ijepes.2020.106674
+[106] (orig#110) Zhou et al. (2021). Multi-microgrid EMS: Architecture, Communication, and Scheduling Strategies. *J. Modern Power Systems and Clean Energy*. DOI:10.35833/mpce.2019.000237
+[107] (orig#111) Ojo et al. (2025). Microgrids' Control Strategies and Real-Time Monitoring Systems: Comprehensive Review. *Energies*. DOI:10.3390/en18133576
+[108] (orig#112) Alhasnawi et al. (2023). New communication platform for smart EMS using MILP. *Energy Systems*. DOI:10.1007/s12667-023-00591-2
+[109] (orig#113) Bahbahani et al. (2017). Cooperative Clustering Protocol With Duty Cycling for EH-WSN. *IEEE Trans. Wireless Communications*. DOI:10.1109/twc.2017.2762674
+[110] (orig#114) Shagari et al. (2020). Heterogeneous Energy and Traffic Aware Sleep-Awake Cluster-Based Routing. *IEEE Access*. DOI:10.1109/access.2020.2965206
+[111] (orig#115) Ramkumar (2025). Adaptive Duty-Cycled Cooperative Clustering Model for EH-WSN. *CNC 2025*. DOI:10.1109/cnc68716.2025.11484711
+[112] (orig#116) Liu et al. (2023). DCC-IACJS: bio-inspired duty cycle-based clustering for energy-efficient WSN. *J. King Saud University CIS*. DOI:10.1016/j.jksuci.2023.01.015
+[113] (orig#117) V. et al. (2025). Energy-Aware MAC Protocols with Load Balancing for Solar-Powered WSN. *ICDSNS 2025*. DOI:10.1109/icdsns65743.2025.11168589
+[114] (orig#118) Tolani et al. (2023). Energy-Efficient Duty-Cycle Hybrid MAC Protocol for WSN. *Wireless Personal Communications*. DOI:10.1007/s11277-023-10448-7
+[115] (orig#119) Chauhan et al. (2022). Variable duty cycle aware energy efficient clustering strategy for WSN. *J. Ambient Intelligence and Humanized Computing*. DOI:10.1007/s12652-022-04363-1
+[116] (orig#120) Gong et al. (2023). Centralized Energy-Efficient Clustering Protocol for WSN. *IEEE Sensors J.* DOI:10.1109/jsen.2022.3224180
+[117] (orig#121) Yang et al. (2025). DRL-Driven Workload Offloading for Energy-Efficient Solar-Powered WSN. *ACM CoNEXT Workshop*. DOI:10.1145/3769698.3771226
+[118] (orig#122) Jalalinejad et al. (2024). Hybrid Multi-Hop Clustering and Energy-Aware Routing for EH-WSN. *IEEE Access*. DOI:10.1109/access.2024.3458795
+[119] (orig#123) Zhao et al. (2023). Load-Aware Energy-Efficient Clustering Algorithm in Sensor-Cloud. *J. Grid Computing*. DOI:10.1007/s10723-023-09683-w
+[120] (orig#124) Hady (2020). Duty Cycling Centralized Hierarchical Routing Protocol for WSN. *Comput. Syst. Sci. Eng.* DOI:10.32604/csse.2020.35.347
+[121] (orig#125) Yadav et al. (2023). Clustering-Based Energy Efficient Task Offloading for Sustainable Fog Computing. *IEEE Trans. Sustainable Computing*. DOI:10.1109/tsusc.2022.3186585
+[122] (orig#126) González et al. (2024). Evolutionary, Swarm, Iterative-Based Task-Offloading Optimization for WSN Battery Life. *IEEE Sensors J.* DOI:10.1109/jsen.2024.3419558
+[123] (orig#127) Li et al. (2020). Energy-Aware Task Offloading in the Internet of Things. *IEEE Wireless Communications*. DOI:10.1109/mwc.001.1900495
+[124] (orig#128) Zhang et al. (2018). Peer-to-Peer energy trading in a Microgrid. *Applied Energy*. DOI:10.1016/j.apenergy.2018.03.010
+[125] (orig#129) Zhou et al. (2023). P2P energy sharing and trading in smart communities: pricing, decision-making, agent-based collaboration. *Renewable Energy*. DOI:10.1016/j.renene.2023.02.125
+[126] (orig#130) Long et al. (2018). P2P energy sharing through two-stage aggregated battery control in community microgrid. *Applied Energy*. DOI:10.1016/j.apenergy.2018.05.097
+[127] (orig#131) Luo et al. (2022). Distributed P2P energy trading based on game theory, DER ownership complexity. *J. Cleaner Production*. DOI:10.1016/j.jclepro.2022.131573
+[128] (orig#132) Paudel et al. (2019). P2P Energy Trading in a Prosumer-Based Community Microgrid: Game-Theoretic Model. *IEEE Trans. Industrial Electronics*. DOI:10.1109/tie.2018.2874578
+[129] (orig#133) Anoh et al. (2020). Energy P2P Trading in Virtual Microgrids: A Game-Theoretic Approach. *IEEE Trans. Smart Grid*. DOI:10.1109/tsg.2019.2934830
+[130] (orig#134) Yan et al. (2023). P2P transactive energy trading of multiple microgrids under renewable uncertainty. *Int. J. Electrical Power & Energy Systems*. DOI:10.1016/j.ijepes.2023.109235
+[131] (orig#135) Alam et al. (2019). Peer-to-peer energy trading among smart homes. *Applied Energy*. DOI:10.1016/j.apenergy.2019.01.091
+[132] (orig#136) Vieira et al. (2021). P2P Energy Trading in a Microgrid Leveraged by Smart Contracts. *Renewable and Sustainable Energy Reviews*. DOI:10.1016/j.rser.2021.110900
+[133] (orig#137) Lan et al. (2025). Scalable P2P Energy Trading System With Microgrid Coalitions. *ICSGGE 2025*. DOI:10.1109/icsgge64667.2025.10985166
+[134] (orig#138) Alfaverh et al. (2023). Dynamic P2P Electricity Market Model for Community Microgrid with Price-Based DR. *IEEE Trans. Smart Grid*. DOI:10.1109/tsg.2023.3246083
+[135] (orig#139) Wang et al. (2018). P2P Energy Trading Among Microgrids with Multidimensional Willingness. *Energies*. DOI:10.3390/en11123312
+[136] (orig#140) Lauss et al. (2021). Accurate and Stable HIL Real-Time Simulation of Integrated Power Electronics and Power Systems. *IEEE Trans. Power Electronics*. DOI:10.1109/tpel.2020.3040071
+[137] (orig#141) Mohammadi et al. (2022). Real-Time Controller-HIL Testing of Power Electronics Converters. *PEDSTC 2022*. DOI:10.1109/pedstc53976.2022.9767506
+[138] (orig#142) Lu et al. (2007). Low-Cost Real-Time HIL Testing Approach of Power Electronics Controls (VTB-RT). *IEEE Trans. Industrial Electronics*. DOI:10.1109/tie.2007.892253
+[139] (orig#143) D'Arco et al. (2024). Multi-HIL Laboratory Testing of Power Converters and IEDs for Large-Scale Power Systems. *IEEE Open J. Power Electronics*. DOI:10.1109/ojpel.2024.3460709
+[140] (orig#144) Bai et al. (2026). Multilayer Device-Level Electro-Thermal Real-Time Simulation and Multipurpose HIL Testing. *IEEE Trans. Power Electronics*. DOI:10.1109/tpel.2025.3650187
+[141] (orig#145) Lucía et al. (2011). Real-Time FPGA-Based HIL Simulation Test Bench for Multiple-Output Power Converters. *IEEE Trans. Industry Applications*. DOI:10.1109/tia.2010.2102997
+[142] (orig#146) Estrada et al. (2020). Real-Time HIL Simulation Methodology for Power Converters Using LabVIEW FPGA. *Energies*. DOI:10.3390/en13020373
+[143] (orig#147) Shekhar et al. (2023). Development of Reliable Power Electronic Systems using Real Time Digital Twin Based PHIL Testbed. *PowerTech 2023*. DOI:10.1109/powertech55446.2023.10202818
+[144] (orig#148) Badar et al. (2021). Efficient Real-Time Controller Design Test Bench for Power Converter Applications. *IEEE Access*. DOI:10.1109/access.2021.3107911
+[145] (orig#149) Lauss et al. (2019). Multirate Partitioning Interface for Enhanced Stability of PHIL Real-Time Simulation. *IEEE Trans. Industrial Electronics*. DOI:10.1109/tie.2018.2826482
+[146] (orig#150) Matar et al. (2010). FPGA Implementation of the Power Electronic Converter Model for Real-Time Simulation. *IEEE Trans. Power Delivery*. DOI:10.1109/tpwrd.2009.2033603

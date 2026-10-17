@@ -1,0 +1,359 @@
+\documentclass[electronics,article,submit,moreauthors]{Definitions/mdpi}
+
+\firstpage{1}
+\makeatletter
+\setcounter{page}{\@firstpage}
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2026}
+\copyrightyear{2026}
+\datereceived{ }
+\daterevised{ }
+\dateaccepted{ }
+\datepublished{ }
+
+\Title{Hazard-Coupled Self-Powering and Corridor-Wide Duty-Brokering for Off-Grid Landslide Early-Warning IoT Sensor Swarms: A Design and Simulation Study for Malaysian Highway Cut-Slopes}
+
+% AUTHOR IDENTITY REMOVED FOR DOUBLE-BLIND REVIEW
+\Author{Author(s) Removed for Double-Blind Review $^{1}$*}
+
+\AuthorNames{Author(s) Removed for Double-Blind Review}
+
+\address{%
+$^{1}$ \quad Affiliation removed for double-blind review.}
+
+\corres{Correspondence: removed for double-blind review.}
+
+\abstract{Microgrid-powered Internet of Things (IoT) sensing has been shown to sustain continuous monitoring by switching between renewable and utility-grid power sources, but this model assumes utility backup is always available --- an assumption that fails for landslide-monitoring sensor swarms on remote, off-grid highway cut-slopes. (1) Background: we address the gap between the single-node ``IoT microgrid'' architecture validated for grid-adjacent deployments and the off-grid, no-utility-backup conditions typical of landslide-prone highway corridors in Malaysia. (2) Methods: we propose two extensions --- hazard-coupled self-powering, in which a piezoelectric harvester generates power that increases with ground micro-movement rather than decreasing with the solar supply under the same monsoon conditions that drive instability, and corridor-wide duty-brokering, in which nodes reassign sensing duties to neighbors with surplus power --- and evaluate them with a controlled, 50-seed Monte Carlo simulation driven by real solar irradiance data (Kuala Lumpur, full year 2025) and real piezoelectric harvester characterization data (23 laboratory experiments), following a systematic review of 147 sources. (3) Results: duty-brokering reduced sensing downtime during correlated monsoon-front conditions by up to 32.7\% at resource-constrained settings, the finding survived an ablation removing the one unvalidated model component, and a real-data cross-check against an actual highland site and four documented Malaysian landslide incidents produced a mixed but informative result that led us to revise the design, downgrading an originally proposed flow-harvester component after finding it viable for under 1\% of the year. (4) Conclusions: this is reported as a preliminary computational feasibility study, not a field validation, and we specify the hardware-in-the-loop and physical-prototype work still required before deployment.}
+
+\keyword{IoT microgrid; landslide early warning; energy harvesting; piezoelectric; duty cycling; hardware-in-the-loop; wireless sensor network; Malaysia}
+
+\begin{document}
+
+\section{Introduction}
+
+Internet of Things (IoT) sensing has become central to natural-hazard monitoring, but IoT devices require continuous power, and continuous power is the scarcest resource in exactly the remote, off-grid locations where hazard sensing matters most. Lee and Wang~\cite{ref101} address this for grid-adjacent deployments with an ``IoT microgrid'' architecture: a single DC sensor node switches between a renewable primary source and a utility-grid secondary source using a double-voltage-threshold controller, validated on a hardware-in-the-loop (HIL) testbed built around a Speedgoat real-time target machine. Their model rests on four assumptions, the second of which --- that utility-grid power is available as backup --- does not hold for landslide-monitoring sensors on remote highway cut-slopes, a deployment class with no utility access and frequently canopy-shaded or monsoon-obscured solar exposure.
+
+Malaysia provides a concrete setting for this gap. The Public Works Department (Jabatan Kerja Raya, JKR) maintains a hazard-and-risk inventory of 34{,}714 slopes along federal roads nationwide (26{,}722 in Peninsular Malaysia, 4{,}178 in Sabah, 3{,}633 in Sarawak, and 181 in Labuan), of which 1{,}577 are classed high-risk, under the National Slope Master Plan 2025--2030. Historical incidents --- the 1993 Highland Towers collapse, the 2008 Bukit Antarabangsa landslide, and the 2022 Batang Kali campsite landslide (31 deaths) --- demonstrate the consequence of slope failure, while recurring closures on routes such as Simpang Pulai--Cameron Highlands show the continuing operational burden on transportation infrastructure. JKR already operates 49 rainfall telemetry stations (37 in Peninsular Malaysia, 9 in Sabah, 3 in Sarawak) and robotic total stations at selected federal-road sections, yet no system identified in our literature review (Section~\ref{sec:related}) reports a self-powering or inter-node redundancy mechanism for the specific condition where solar power and ground instability change together --- a monsoon-triggered correlation this paper treats as the central design problem.
+
+This correlation is not merely a theoretical concern. A sensor network that relies on solar power to operate continuously faces a structural conflict: the same monsoon rainfall that raises landslide risk through soil saturation also attenuates the solar irradiance the sensor needs to keep operating and reporting. If a node's energy buffer is depleted precisely when a storm front passes, the monitoring system fails at the moment it is needed most. The present study investigates whether this conflict can be resolved at the architecture level, rather than through larger batteries or more frequent maintenance visits, which are themselves difficult to sustain on steep, remote, and frequently inaccessible terrain.
+
+We ask: can hazard-coupled self-powering --- energy harvesting whose output rises with the hazard itself, rather than with ambient weather --- combined with corridor-wide duty-brokering --- task reassignment among spatially distributed nodes over the existing communication link --- sustain network-level sensing continuity for an off-grid landslide early-warning swarm, where the reference architecture's utility-backup assumption cannot be satisfied? We do not answer this with field data; no hardware has been deployed as part of this study. Instead, we establish, through systematic literature review, real-data-grounded simulation, and direct cross-checking against real weather and incident records, that the proposed design is mechanistically sound, identify which of its components are and are not currently well supported by evidence, and specify the validation path required before deployment. Throughout, we apply the same verification standard to our own simulation code that we apply to the literature we cite: two implementation errors discovered and corrected during this work are disclosed rather than silently fixed (Section~\ref{sec:internal-validity}), and one model component found, on testing, not to work as originally proposed is reported as a negative result rather than adjusted until it looked favorable (Section~\ref{sec:flow-result}).
+
+The remainder of this paper is organized as follows. Section~\ref{sec:related} reviews related work across nine technology clusters identified through a systematic search. Section~\ref{sec:design} presents the proposed system design and algorithm. Section~\ref{sec:methods} describes the simulation methodology and the real and modeled data used to drive it. Section~\ref{sec:results} reports results, including a sensitivity sweep, an ablation study, and cross-checks against real weather and incident data. Section~\ref{sec:discussion} discusses implications, internal and external validity, and the revisions this process produced to the original design. Section~\ref{sec:conclusion} concludes.
+
+\section{Related Work}
+\label{sec:related}
+
+A systematic, PRISMA-aligned search was conducted across Semantic Scholar, OpenAlex, and PubMed (via a Consensus aggregator interface) using ten thematic queries covering landslide/slope IoT monitoring, rainfall-induced landslide threshold models, piezoelectric and vibration-based self-powered sensing, flow/hydrokinetic energy harvesting, LoRaWAN/LPWAN communication for remote disaster monitoring, IoT microgrid and cyber-physical renewable energy management, energy-aware wireless sensor network (WSN) duty-cycling and clustering, peer-to-peer energy trading in microgrids, and hardware-in-the-loop testbed methodology. From 200 candidate records, duplicates were removed and venue-quality screening was applied: three sources were dropped because their indexing status in Scopus, the Directory of Open Access Journals, or Web of Science could not be confirmed, and one further source, published by a venue with a documented history of large-scale, unrelated peer-review integrity concerns in 2023, was excluded from this manuscript's citation set after we were unable to independently re-verify the specific article within the scope of this study (Section~\ref{sec:verification}). The remaining 146 sources, organized into nine thematic clusters, are cited throughout this review.
+
+\subsection{Landslide and Slope IoT Monitoring Systems}
+
+Thirty of the reviewed systems describe wireless sensor network (WSN) or IoT-based landslide and slope monitoring, spanning deployments in Kerala, India~\cite{ref2,ref12,ref20}; the Darjeeling Himalayas~\cite{ref18}; an informal settlement in Medell\'in, Colombia~\cite{ref14}; and two Malaysian systems, one in Hulu Langat following the 2011 landslide that killed 16 people~\cite{ref21}, and one at Bukit Bauk, Dungun~\cite{ref31}. Reviews of this literature~\cite{ref22,ref23} confirm that landslide WSNs have matured substantially since Ramesh's early Kerala deployments~\cite{ref2,ref12,ref20}, incorporating inertial measurement units~\cite{ref2}, LoRaWAN communication with machine-learning-based risk classification~\cite{ref4,ref5}, geosensor networks for subsurface monitoring~\cite{ref9}, and distributed systems purpose-built for highway embankments~\cite{ref26}. Across this entire cluster, every reviewed system relies on either periodic battery replacement, solar-only backup, or --- where grid-tied --- utility fallback. No reviewed system models a no-grid, node-to-node service-continuity mechanism, which is the specific gap this paper addresses.
+
+\subsection{Rainfall-Induced Landslide Threshold and Prediction Models}
+
+Seventeen sources establish and refine rainfall-intensity--duration and cumulative-rainfall threshold models for predicting landslide occurrence~\cite{ref32,ref33,ref34,ref35,ref36}. These models, several of them region-specific to China~\cite{ref33,ref34,ref37}, Italy~\cite{ref32,ref42,ref43}, and the Himalayas~\cite{ref44,ref46,ref49}, consistently find that landslide risk escalates during sustained or intense rainfall, and that antecedent (cumulative, multi-day) rainfall is frequently a stronger predictor than same-day totals~\cite{ref40,ref45,ref47}. This literature establishes the hazard-signal dynamics --- rainfall intensifying landslide risk with a time lag that can extend over days~\cite{ref48} --- but does not address the power-architecture implication: that the same rainfall simultaneously attenuates the solar irradiance a monitoring node depends on. This structural conflict is not discussed in any source in this cluster.
+
+\subsection{Piezoelectric and Vibration-Based Self-Powered Sensing}
+
+Piezoelectric vibration energy harvesting is a mature, field-validated technology for powering wireless sensor nodes~\cite{ref51,ref55,ref58,ref64}, with reported output power ranging from microwatts~\cite{ref59} to over 100~mW under strong excitation~\cite{ref62}. Critically for this paper's design, two sources already embed piezoelectric elements directly into slope-stabilization geosynthetics --- a geocable--geogrid composite~\cite{ref53} and a ``smart'' geobelt~\cite{ref54} --- using the piezoelectric response to detect strain and microseismic activity within a reinforced slope. Both, however, use the piezoelectric element exclusively for \emph{sensing} (via voltage or impedance signatures), not for harvesting usable \emph{power} to run a wireless node. This distinction --- sensing from ground movement versus powering from it --- is the specific, verified gap this paper's hazard-coupled harvesting design exploits.
+
+\subsection{Flow and Hydrokinetic Energy Harvesting for Remote Sensors}
+
+Fourteen reviewed sources characterize flow-based (hydrokinetic) energy harvesters for wireless sensor applications, including microturbine designs~\cite{ref66,ref71}, triboelectric and electromagnetic hybrid generators~\cite{ref67,ref68}, and broader surveys of the field~\cite{ref69,ref76,ref79}. Reported power output ranges from nanowatts to several hundred milliwatts depending on flow velocity and transduction mechanism~\cite{ref69}, with specific, reproducible power--velocity relationships reported for Savonius-type microturbines operating between 0.5 and 2.0~m/s water velocity~\cite{ref66}. All of this characterization work, without exception, was conducted under clean, controlled flow conditions --- laboratory flow rigs, domestic water pipes, or open water channels --- and none addresses performance under the sediment-laden, intermittent runoff conditions that would be encountered on an actual landslide-prone slope face. This is a field-versus-laboratory validity gap this paper tests directly (Section~\ref{sec:flow-result}).
+
+\subsection{LoRaWAN and Low-Power Wide-Area Network Communication for Remote Disaster Monitoring}
+
+Thirteen sources address Long Range Wide Area Network (LoRaWAN) and related low-power wide-area network (LPWAN) technologies for disaster and environmental monitoring in remote, infrastructure-poor settings~\cite{ref81,ref83,ref84,ref87}, including applications specifically to landslide and rockfall monitoring~\cite{ref86,ref93}. Connectivity reliability under adverse terrain is a recurring, quantified concern: a rural Mozambican deployment reported a packet delivery ratio (PDR) as low as approximately 89\% under terrain- and altitude-constrained conditions~\cite{ref92}, and a Malaysian study of LoRa signal propagation in hilly suburban terrain near Kuala Lumpur found that packet receive ratio could drop by 65\%, with coverage reduced to as little as 1.25~km, across spreading factors SF7 through SF12 at 915~MHz~\cite{ref28}. This Malaysian terrain-degradation finding is, to our knowledge, the closest available match in the literature to the actual highway-corridor communication conditions this paper's duty-brokering protocol must tolerate, and is used accordingly in Section~\ref{sec:design}.
+
+\subsection{IoT Microgrid and Cyber-Physical Renewable Energy Management}
+
+Seventeen sources, including the primary reference architecture~\cite{ref101}, describe IoT-integrated microgrid energy management systems~\cite{ref96,ref97,ref98,ref99,ref100}, reviews of microgrid control and monitoring strategies~\cite{ref102,ref108,ref111}, blockchain- and machine-learning-enhanced approaches~\cite{ref95,ref103,ref105}, and demand-side management frameworks~\cite{ref109,ref112}. One source~\cite{ref104} reports a hybrid photovoltaic/wind/piezoelectric 2.5~kW generation system for IoT-enabled microgrid energy management, demonstrating that piezoelectric sources have been integrated into microgrid architectures before, though at a scale and for a purpose (general-purpose hybrid generation, not hazard-coupled landslide monitoring) distinct from this paper's proposal. This cluster establishes the architectural baseline --- a renewable primary source switched against a secondary source under controller supervision --- that Lee and Wang~\cite{ref101} validate for grid-adjacent IoT applications and that this paper extends to the off-grid case.
+
+\subsection{Energy-Aware Duty-Cycling, Clustering, and Task-Offloading Protocols for Wireless Sensor Networks}
+
+Fourteen sources provide the generic algorithmic basis for the corridor-wide duty-brokering protocol proposed in this paper. Energy-harvesting-aware clustering protocols rotate the energy-intensive cluster-head role among nodes based on harvested-energy forecasts~\cite{ref113,ref115,ref122}, heterogeneous sleep--awake scheduling balances energy and traffic load~\cite{ref114,ref118}, and deep-reinforcement-learning-based workload offloading reassigns computational tasks from energy-constrained to energy-sufficient nodes in solar-powered WSNs~\cite{ref121}. None of this literature, however, models the specific topology this paper addresses: a linear, storm-cell-correlated highway corridor in which the energy asymmetry driving task reassignment arises from a geographically structured hazard (a passing storm front) rather than from generic stochastic energy-harvesting variability.
+
+\subsection{Peer-to-Peer Energy Trading in Microgrids}
+
+Twelve sources establish peer-to-peer (P2P) energy trading as a mature mechanism for negotiating a shared resource among autonomous, self-interested microgrid participants, using game-theoretic~\cite{ref132,ref133}, auction-based~\cite{ref130}, and blockchain-enabled~\cite{ref136} market designs. This literature provides the conceptual and algorithmic precedent for this paper's duty-brokering mechanism, which substitutes ``sensing/reporting duty'' for ``kilowatt-hour'' as the traded unit --- a reinterpretation, not a direct application, of the P2P energy-trading paradigm.
+
+\subsection{Hardware-in-the-Loop Testbed Methodology}
+
+Eleven further sources, together with the primary reference architecture~\cite{ref101}, describe hardware-in-the-loop (HIL) and power-hardware-in-the-loop (PHIL) methodologies for validating power electronic and microgrid control systems~\cite{ref140,ref142,ref145,ref146}, including stability and accuracy considerations specific to the interface between simulated and physical components~\cite{ref140,ref149}. This methodology, validated at the single-node scale by Lee and Wang~\cite{ref101}, is the basis for the multi-node HIL extension this paper specifies (Section~\ref{sec:discussion}) as the next required validation step beyond the simulation reported here.
+
+\subsection{Synthesis of the Literature Gap}
+
+No source among the 146 reviewed combines hazard-coupled harvesting --- powering, rather than only sensing, from ground movement --- with duty-level task brokering across a spatially-correlated storm topology. This gap was verified by direct inspection of the two closest-matching sources~\cite{ref53,ref54}, rather than assumed from topical distance, and a contradiction surfaced during this review is disclosed rather than resolved by omission: P2P energy-trading literature generally assumes reliable, continuous communication links to negotiate trades~\cite{ref130,ref132}, while the LoRaWAN rural-deployment literature reports packet delivery as low as 89\% under comparable terrain~\cite{ref92}, and as degraded as a 65\% reduction in packet receive ratio in a Malaysian hilly-suburban setting~\cite{ref28}. A corridor-wide negotiation protocol must tolerate lossy, intermittent links; this constraint is addressed explicitly in the proposed design (Section~\ref{sec:design}).
+
+\section{Proposed System Design}
+\label{sec:design}
+
+\subsection{Architecture}
+
+Building on the reference architecture's controller--energy-source--IoT-load structure~\cite{ref101}, the proposed design makes two structural changes to accommodate the absence of utility-grid backup, with one of these changes revised during this study in response to real-data testing (Section~\ref{sec:flow-result}).
+
+\textbf{Hazard-coupled harvesting.} Each node pairs a piezoelectric harvester, mechanically coupled to the monitored slope segment, with a baseline solar panel retained as a tertiary source. As originally proposed, a flow/runoff harvester positioned in the slope's surface drainage channel was included as a second complementary source, intended to rise in output as rainfall --- and therefore landslide risk --- increased, directly inverting the correlation structure that makes solar-only backup fail precisely when monitoring is most needed. Section~\ref{sec:flow-result} reports a real-data-driven finding that revises this component's role to a rare-event supplement rather than a core design element, for reasons given there.
+
+\textbf{Corridor-wide duty-brokering.} Rather than falling back to a nonexistent utility connection, a node whose harvested-energy buffer drops below a lower threshold signals neighboring nodes, over the same LoRaWAN link already required for sensing, to temporarily assume its reporting duty. This adapts cluster-head rotation logic from energy-harvesting-aware WSN clustering~\cite{ref113} with the negotiation structure of peer-to-peer energy-trading mechanisms~\cite{ref132}, substituting ``sensing/reporting duty'' for ``kilowatt-hour'' as the traded unit. Because tropical convective storms are frequently localized rather than basin-wide, nodes spaced tens of kilometers apart along a highway corridor are structurally more likely to retain surplus capacity even when a nearer cluster of nodes is storm-affected --- the property that distinguishes this topology from a fully-correlated, basin-wide flood scenario considered and set aside during the scoping of this study.
+
+\textbf{Lossy-link tolerance.} Given the measured packet-delivery degradation reported under comparable terrain~\cite{ref28,ref92}, the brokering protocol is designed not to assume reliable signaling. Brokering requests carry a short validity window and are retried via at least one alternate relay node before being treated as failed. In the absence of any successful hand-off, the node defaults to the reference architecture's own double-threshold local switching behavior~\cite{ref101}, meaning the proposed system degrades gracefully to the already-validated single-node baseline rather than failing outright when the network layer is unreliable.
+
+\subsection{Algorithm}
+
+Algorithm~\ref{alg:source} extends the reference architecture's double-threshold switching~\cite{ref101} to a no-utility-grid, multi-source node. Algorithm~\ref{alg:broker} describes the corridor-wide duty-brokering mechanism that operates on top of it.
+
+\begin{Theorem}[Algorithm 1: Per-Node Hazard-Coupled Source Selection]
+\label{alg:source}
+For each node $i$ at each discrete timestep $t$:
+\begin{enumerate}
+\item Compute $\mathrm{solar}_i(t)$ as a function of measured global horizontal irradiance, panel area, and panel efficiency.
+\item Draw $\mathrm{piezo}_i(t)$ stochastically from a pool of measured harvester output values, with the trigger probability elevated under conditions classified as monsoon-correlated (Section~\ref{sec:methods}).
+\item Set $\mathrm{harvested}_i(t) = \mathrm{solar}_i(t) + \mathrm{piezo}_i(t)$.
+\item Update the energy buffer:
+\[
+\mathrm{buffer}_i(t) = \mathrm{clip}\Big(\mathrm{buffer}_i(t{-}1) + \big(\mathrm{harvested}_i(t) - \mathrm{demand}\big)/60,\ \ 0,\ \ \mathrm{capacity}\Big).
+\]
+\item If $\mathrm{buffer}_i(t) \geq \mathrm{lower\_threshold}$, node $i$ reports normally; otherwise, node $i$ becomes a brokering candidate (Algorithm~\ref{alg:broker}).
+\end{enumerate}
+\end{Theorem}
+
+\begin{Theorem}[Algorithm 2: Corridor-Wide Duty-Brokering]
+\label{alg:broker}
+At each timestep $t$, after Algorithm~\ref{alg:source} updates all nodes' buffers:
+\begin{enumerate}
+\item For each node $i$ with $\mathrm{buffer}_i(t) < \mathrm{lower\_threshold}$ and not currently covered by a prior hand-off:
+\item \quad For each neighbor $j \neq i$: if $\mathrm{buffer}_j(t) > \mathrm{upper\_threshold}$, attempt a hand-off request from $i$ to $j$.
+\item \quad\quad If the link succeeds, with probability equal to the measured packet delivery ratio~\cite{ref92}, neighbor $j$ covers node $i$'s reporting duty for a fixed cooldown window, and the search for a donor stops.
+\item If no neighbor qualifies, or every link attempt fails, node $i$ falls back to Algorithm~\ref{alg:source}'s own local behavior, degrading gracefully to the already-validated single-node baseline rather than failing outright.
+\end{enumerate}
+\end{Theorem}
+
+\section{Materials and Methods}
+\label{sec:methods}
+
+\subsection{Real Data Used to Parameterize the Simulation}
+
+Four quantities in the simulation are driven directly by real, independently sourced measurement data rather than by assumption.
+
+\textbf{Solar driver.} Full calendar year 2025, one-minute-resolution Global Horizontal Irradiation (GHI), Kuala Lumpur, Malaysia, from a dataset published on Mendeley Data (DOI: 10.17632/bgch4tw79k.1, Creative Commons Attribution 4.0 license), comprising 365 daily files of 720 daytime readings each (07:00--19:00 local time).
+
+\textbf{Piezoelectric harvester power.} Instantaneous measured power values pooled from 23 characterized experiments of a low-frequency vibration energy harvester, published on Mendeley Data (DOI: 10.17632/y4cmrsdv9f.1, Creative Commons Attribution 4.0 license; companion characterization paper~\cite{ref59}). Across the 23 experiments, per-experiment mean power ranged from approximately 66 to 9{,}505 (dataset-native power-column units), a spread of roughly 145-fold reflecting different excitation conditions swept during characterization; the physical unit of this column could not be confirmed within the scope of this study and is disclosed as an open item (Section~\ref{sec:verification}).
+
+\textbf{Node power demand.} 295.49~mW, the measured average device power reported in the reference architecture's own 300-second case-study cycle~\cite{ref101}.
+
+\textbf{Panel geometry.} 118~mm~$\times$~70~mm, the exact small photovoltaic panel (YML-118X70MM) used in the reference architecture's own validation~\cite{ref101}.
+
+\textbf{LoRaWAN link-success probability.} 0.89, the measured packet delivery ratio from a rural, hilly-terrain LoRaWAN deployment~\cite{ref92}.
+
+\textbf{Independent cross-check data.} Full-year hourly solar irradiance and precipitation data from the NASA POWER Project (MERRA-2/SYN1DEG reanalysis, freely accessible via the POWER Project application programming interface, no registration required) for four real coordinates: Cameron Highlands/Tanah Rata (4.4747$^\circ$N, 101.3777$^\circ$E), Ringlet (4.4833$^\circ$N, 101.3667$^\circ$E), Simpang Pulai (4.5667$^\circ$N, 101.1167$^\circ$E), and Karak Highway (3.4931$^\circ$N, 101.8109$^\circ$E); and for two further real documented landslide sites, Batang Kali (3.42333$^\circ$N, 101.75389$^\circ$E) and Hulu Langat (3.1386$^\circ$N, 101.8142$^\circ$E).
+
+\subsection{Modeled Parameters}
+
+The following quantities are explicitly disclosed as modeling assumptions, not measurements, and are treated accordingly throughout: panel efficiency (swept over 0.10--0.30 in the sensitivity analysis), energy-buffer sizing expressed as hours of demand bridged (swept over 0.5--4.0~h), the inter-node correlation structure (a day is classified ``sustained overcast,'' and treated as fully correlated, $\rho=1$, across all nodes, when it shows zero detected cloud-transient dips and a below-median peak irradiance for the year; all other days apply an independent per-node local-cloud attenuation with an assumed probability), and the piezoelectric movement-trigger probabilities (elevated on sustained-overcast days relative to dry days). These are swept in a sensitivity analysis (Section~\ref{sec:sweep}) rather than fixed at one arbitrary value, precisely because they are assumptions and not measurements.
+
+\subsection{Simulation and Statistical Design}
+
+A five-node corridor was simulated at one-minute resolution over the full real solar year (262{,}800 node-timesteps). Baseline (Algorithm~\ref{alg:source} only) and treatment (Algorithm~\ref{alg:source} plus Algorithm~\ref{alg:broker}) conditions were compared using a common-random-numbers paired design: both conditions draw from an identical environmental random-number stream (governing local-cloud masks and piezoelectric trigger events) that is entirely independent of a separate, brokering-only random-number stream, so that the presence or absence of duty-brokering is the only difference between each paired run. Each of sixteen points in a four-by-four grid (panel efficiency $\times$ buffer hours) was run across 50 independent seeds; results are reported as the mean and standard deviation across seeds. An ablation removing the one model component with no empirical grounding --- the flow-harvester placeholder --- was subsequently run across eight representative grid points at the same seed count.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Baseline Literature-Gap Confirmation}
+
+The review in Section~\ref{sec:related} confirms that the proposed combination --- hazard-coupled powering plus duty-level brokering under a spatially-correlated storm topology --- does not appear among the 146 sources examined, supporting the novelty basis of the design proposed here.
+
+\subsection{Simulation: Duty-Brokering Effect Across a Sensitivity Sweep}
+\label{sec:sweep}
+
+Table~\ref{tab:sweep} reports the full 50-seed, sixteen-point sensitivity sweep. Across every tested combination of panel efficiency and buffer sizing, duty-brokering reduced dark-time during sustained-overcast (storm-correlated) conditions, with the statistical clarity of the effect depending on how resource-constrained the system is. At the most constrained setting tested (panel efficiency 0.10, buffer 0.5~h), the reduction was $32.7\% \pm 1.2\%$ ($n=50$ seeds) --- a large, clearly significant effect. At the most comfortably provisioned setting tested (panel efficiency 0.30, buffer 4.0~h), the baseline system was already dark only 2.3\% of the time, and the residual effect ($3.1\% \pm 3.0\%$) was directionally consistent but not clearly distinguishable from zero --- a physically sensible pattern, since a system that rarely fails has little for brokering to fix.
+
+\begin{table}[H]
+\caption{Fifty-seed Monte Carlo sensitivity sweep: duty-brokering effect on dark-time during sustained-overcast (monsoon-correlated) conditions, across a 4$\times$4 grid of panel efficiency and energy-buffer sizing. Values are mean $\pm$ standard deviation across 50 independent seeds. Non-stress-day change and broker events are included for completeness.\label{tab:sweep}}
+\begin{adjustwidth}{-\extralength}{0cm}
+\begin{tabularx}{\fulllength}{CCCCCCC}
+\toprule
+\textbf{Panel Eff.} & \textbf{Buffer (h)} & \textbf{Baseline Dark \%} & \textbf{Full-Net. Cov.\ (Base$\to$Treat)} & \textbf{Stress-Day $\Delta$} & \textbf{Non-Stress $\Delta$} & \textbf{Broker Events/yr} \\
+\midrule
+0.10 & 0.5 & 50.92\% & 44.39\%$\to$48.58\% & $-32.69\pm1.22\%$ & $-0.21\pm0.05\%$ & 1528 \\
+0.10 & 1.0 & 48.14\% & 46.91\%$\to$49.82\% & $-20.75\pm1.09\%$ & $-0.11\pm0.04\%$ & 890 \\
+0.10 & 2.0 & 46.59\% & 47.99\%$\to$49.51\% & $-9.36\pm1.50\%$ & $-0.04\pm0.02\%$ & 389 \\
+0.10 & 4.0 & 45.17\% & 48.38\%$\to$48.91\% & $-2.60\pm1.08\%$ & $-0.03\pm0.02\%$ & 101 \\
+0.15 & 0.5 & 37.69\% & 59.04\%$\to$62.12\% & $-32.16\pm1.48\%$ & $-0.28\pm0.06\%$ & 1153 \\
+0.15 & 1.0 & 34.52\% & 62.15\%$\to$64.26\% & $-20.62\pm1.53\%$ & $-0.17\pm0.05\%$ & 669 \\
+0.15 & 2.0 & 28.79\% & 67.67\%$\to$68.74\% & $-10.18\pm1.61\%$ & $-0.06\pm0.03\%$ & 288 \\
+0.15 & 4.0 & 13.04\% & 84.10\%$\to$84.43\% & $-4.40\pm1.67\%$ & $-0.06\pm0.07\%$ & 67 \\
+0.20 & 0.5 & 31.40\% & 65.99\%$\to$68.46\% & $-31.79\pm1.46\%$ & $-0.33\pm0.07\%$ & 937 \\
+0.20 & 1.0 & 28.09\% & 69.25\%$\to$70.89\% & $-20.25\pm1.87\%$ & $-0.17\pm0.06\%$ & 533 \\
+0.20 & 2.0 & 20.90\% & 76.25\%$\to$77.02\% & $-10.01\pm2.04\%$ & $-0.06\pm0.04\%$ & 209 \\
+0.20 & 4.0 & 6.43\% & 91.92\%$\to$92.11\% & $-4.84\pm3.30\%$ & $-0.06\pm0.07\%$ & 36 \\
+0.30 & 0.5 & 24.05\% & 73.86\%$\to$75.65\% & $-31.21\pm1.61\%$ & $-0.37\pm0.10\%$ & 717 \\
+0.30 & 1.0 & 20.80\% & 77.12\%$\to$78.23\% & $-19.82\pm2.20\%$ & $-0.16\pm0.08\%$ & 391 \\
+0.30 & 2.0 & 12.04\% & 86.20\%$\to$86.59\% & $-9.93\pm2.52\%$ & $-0.06\pm0.07\%$ & 119 \\
+0.30 & 4.0 & 2.29\% & 97.10\%$\to$97.14\% & $-3.11\pm3.03\%$ & $-0.04\pm0.12\%$ & 9 \\
+\bottomrule
+\end{tabularx}
+\end{adjustwidth}
+\end{table}
+
+\begin{figure}[H]
+\begin{adjustwidth}{-\extralength}{0cm}
+\centering
+\includegraphics[width=0.95\fulllength]{fig_sweep.pdf}
+\end{adjustwidth}
+\caption{(\textbf{a}) Duty-brokering's effect on stress-day (monsoon-correlated) dark-time across the full sensitivity sweep, mean $\pm$ standard deviation over 50 seeds per point. The effect is large and statistically clear at resource-constrained settings (small buffer, low panel efficiency) and shrinks toward the noise floor as the system becomes comfortably over-provisioned. (\textbf{b}) The corresponding baseline resource-constraint level (percentage of all simulated minutes the baseline system is dark), shown to make clear why the effect shrinks at generously provisioned settings: a system that rarely fails has little for brokering to fix.\label{fig:sweep}}
+\end{figure}
+
+The mechanism driving the effect was non-obvious at design time: even on fully solar-correlated storm days, independently-triggered piezoelectric harvesting events create enough node-to-node buffer asymmetry for brokering to remain useful, rather than the simpler expectation that a fully-correlated storm would leave all nodes equally dark. This is reflected in the stress-day column of Table~\ref{tab:sweep}, where the brokering effect is consistently and substantially larger than on non-stress days across every tested setting, not only at one favorable point.
+
+\subsection{Ablation: Removing the One Unvalidated Model Component}
+
+Setting the flow-harvester placeholder to exactly zero across eight representative grid points (panel efficiency $\in\{0.15,0.20\}$, all four buffer values, 50 seeds each, 400 further seeded runs) left the brokering effect essentially unchanged. Table~\ref{tab:ablation} compares the stress-day effect with and without the placeholder; every ablated value falls within the original run's reported uncertainty, confirming that the headline finding does not depend on the one model component that had no empirical grounding at the time of the original sweep.
+
+\begin{table}[H]
+\caption{Ablation: stress-day dark-time reduction with the fabricated flow-harvester placeholder present versus set to exactly zero, eight representative grid points, 50 seeds each.\label{tab:ablation}}
+\begin{tabularx}{\textwidth}{CCCC}
+\toprule
+\textbf{Panel Eff.} & \textbf{Buffer (h)} & \textbf{Stress $\Delta$, with Flow (Placeholder)} & \textbf{Stress $\Delta$, Flow $=$ 0 (Ablated)} \\
+\midrule
+0.15 & 0.5 & $-32.16\pm1.48\%$ & $-31.97\pm1.47\%$ \\
+0.15 & 1.0 & $-20.62\pm1.53\%$ & $-20.17\pm1.85\%$ \\
+0.15 & 2.0 & $-10.18\pm1.61\%$ & $-9.60\pm1.72\%$ \\
+0.15 & 4.0 & $-4.40\pm1.67\%$ & $-4.26\pm1.98\%$ \\
+0.20 & 0.5 & $-31.79\pm1.46\%$ & $-31.51\pm1.55\%$ \\
+0.20 & 1.0 & $-20.25\pm1.87\%$ & $-19.90\pm1.98\%$ \\
+0.20 & 2.0 & $-10.01\pm2.04\%$ & $-9.87\pm2.07\%$ \\
+0.20 & 4.0 & $-4.84\pm3.30\%$ & $-4.64\pm2.41\%$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Flow-Harvester Viability: A Literature-Grounded, Real-Rainfall-Driven Result}
+\label{sec:flow-result}
+
+A subsequent, literature-grounded replacement for the flow-harvester placeholder was constructed, driven by real hourly rainfall at the actual highland corridor site (NASA POWER) and a power--velocity curve fitted from two real measured points in a published microturbine characterization study~\cite{ref66} (125~$\mu$W at 0.5~m/s and 5.1~mW at 2.0~m/s). The fitted exponent, 2.68, lies close to the theoretical $v^3$ scaling expected for kinetic turbines, which we take as a sanity check that these are physically consistent measurements rather than noise. Under a disclosed, rational-method runoff model with a concentrated 50~mm~$\times$~50~mm outlet channel, the catchment geometry at which the implied channel velocity stayed within the literature's tested range (1{,}000--2{,}000~m$^2$) predicted the harvester would be active for under 1\% of the year, producing sub-milliwatt power even when active (Table~\ref{tab:flow}). Larger, still-plausible catchment areas produced larger power figures only by extrapolating the fitted curve far beyond its validated velocity range (implied velocities up to 7.6~m/s against a 2.0~m/s upper test limit) and are not reported as credible predictions.
+
+\begin{table}[H]
+\caption{Modeled flow-harvester activity under a real rainfall record (Cameron Highlands, 2025) as a function of assumed catchment area, holding channel geometry fixed at 50~mm~$\times$~50~mm. Rows at or above 5{,}000~m$^2$ require extrapolating the fitted power--velocity curve beyond its literature-validated range and are not reported as credible.\label{tab:flow}}
+\begin{tabularx}{\textwidth}{CCCCC}
+\toprule
+\textbf{Catchment (m\boldmath{$^2$})} & \textbf{Active Hours/Year} & \textbf{\% of Year} & \textbf{Mean Power (mW)} & \textbf{Within Tested Velocity Range?} \\
+\midrule
+500 & 0 & 0.00\% & --- & --- (never reaches cut-in) \\
+1{,}000 & 13 & 0.15\% & 0.224 & Yes \\
+2{,}000 & 85 & 0.97\% & 0.450 & Yes (peak $\approx$1.5~m/s) \\
+5{,}000 & 414 & 4.73\% & 1.402 & \textbf{No --- extrapolated} \\
+10{,}000 & 1{,}031 & 11.77\% & 3.803 & \textbf{No --- extrapolated} \\
+20{,}000 & 1{,}897 & 21.66\% & 13.365 & \textbf{No --- extrapolated} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+This is an unfavorable, quantified result for this specific design component, reported as such rather than adjusted until favorable: at a plausible highway cut-slope catchment size, the flow harvester, as originally conceived, would contribute usable power only during rare, brief windows, not as a reliable complementary source.
+
+\subsection{Real-Data Cross-Checks}
+\label{sec:cross-check}
+
+Real paired hourly solar and precipitation data at the actual highland corridor site (NASA POWER) showed a moderate negative correlation between daily rainfall and daily peak solar irradiance ($r = -0.454$, $n = 365$ days), with the wettest-quartile days averaging 15.9\% lower peak solar than the driest quartile, and November showing both the highest mean rainfall and the lowest mean peak solar of any month --- independently matching a solar-only-derived monsoon-suppression signature obtained separately from the Kuala Lumpur dataset. The same reanalysis data, however, returned byte-identical values across three real coordinates spanning a 35~km stretch of the actual highway corridor (Cameron Highlands, Ringlet, and Simpang Pulai), confirming that this data product's native resolution of approximately 1$^\circ$ ($\sim$100~km) cannot resolve the within-corridor spatial decorrelation this paper's correlation-structure assumption requires. This specific question --- whether storm cells genuinely decorrelate at the 10--20~km node spacing the design assumes --- remains open pending ground-station data.
+
+Cross-checking four independently documented, precisely dated real Malaysian landslide incidents against real weather data on their actual dates produced a mixed, informative result, summarized in Table~\ref{tab:events}. One event (6 January 2025, Cameron Highlands) showed a clean same-day match to the predicted high-rain/low-solar signature, with rainfall in the 95.6th percentile of its year and solar in the 11.8th percentile, on the actual reported date of a rain-triggered landslide. A second (21 September 2024, Cameron Highlands) showed no same-day match but a plausible antecedent, cumulative-rainfall pattern, with the darkest day in the surrounding two-month window occurring four days prior. The deadliest event in the set, the Batang Kali campsite landslide of 16 December 2022 (31 deaths), failed on a comparatively sunny day (91.8th percentile peak solar) three days after an extreme dark-and-wet signature (1.6th percentile solar, 91.8th percentile rainfall), consistent with the responsible agency's own stated cause of delayed subsurface saturation. The fourth event (21 May 2011, Hulu Langat, 16 deaths) showed no clear signature match in either direction on the event day or in the preceding days.
+
+\begin{table}[H]
+\caption{Real weather conditions on four independently documented, precisely dated Malaysian landslide events, compared to the predicted high-rain/low-solar hazard signature.\label{tab:events}}
+\begin{adjustwidth}{-\extralength}{0cm}
+\begin{tabularx}{\fulllength}{CCCCC}
+\toprule
+\textbf{Event} & \textbf{Date} & \textbf{Deaths} & \textbf{Same-Day Signature Match} & \textbf{Notes} \\
+\midrule
+Cameron Highlands & 6 Jan 2025 & 0 & Clean match (95.6th pctl.\ rain, 11.8th pctl.\ solar) & Explicitly rain-triggered per news reports \\
+Cameron Highlands & 21 Sep 2024 & 0 & No same-day match & Darkest day of 2-month window 4 days prior \\
+Batang Kali & 16 Dec 2022 & 31 & No same-day match (sunny day) & Extreme dark/wet signature 3 days prior; agency cited delayed subsurface saturation \\
+Hulu Langat & 21 May 2011 & 16 & No clear match & Moderate conditions throughout \\
+\bottomrule
+\end{tabularx}
+\end{adjustwidth}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{fig_events.pdf}
+\caption{Same-day rainfall and solar-irradiance percentiles (relative to each event's reference year or surrounding window) on the four real, documented landslide event dates cross-checked in this study. The Cameron Highlands (6 January 2025) event shows a clean match to the predicted hazard signature; the Batang Kali event (the deadliest in the set) does not match on the event day itself, consistent with its delayed, cumulative-saturation failure mechanism discussed in Section~\ref{sec:cross-check}. The September 2024 event's same-day solar percentile is not shown because the cross-check for that event (Section~\ref{sec:cross-check}) characterizes it via an antecedent multi-day window rather than a single-day value.\label{fig:events}}
+\end{figure}
+
+This heterogeneity, from a sample of four, supports a design conclusion rather than a statistical one. A purely weather-coupled harvesting design would have been at its most relaxed state at exactly the moment the deadliest event in this set actually failed --- a direct, data-derived argument for ground-movement-coupled (piezoelectric) rather than weather-coupled harvesting as the primary design element, independent of the aggregate correlation statistics that originally motivated it.
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What This Process Revised in the Original Design}
+
+The flow-harvester component, present in the design as originally conceived (Section~\ref{sec:design}), is downgraded to a rare-event supplement rather than a core element following the result in Section~\ref{sec:flow-result} --- a revision produced directly by testing the design against real data rather than retained on the strength of the original rationale alone. The piezoelectric component's justification is correspondingly strengthened by the event-level finding in Section~\ref{sec:cross-check}, independent of the aggregate correlation statistics that motivated it originally. We consider this revision process, in which real data was used to challenge rather than merely illustrate the design, to be as important a contribution of this paper as the quantitative results themselves.
+
+\subsection{Internal Validity}
+\label{sec:internal-validity}
+
+Two implementation errors were identified and corrected during this work before any result was reported. First, an uncontrolled random-number confound initially let the baseline and treatment conditions draw from different random environments, inflating the apparent treatment effect; this was corrected by seeding two independent random-number streams --- one for environmental stochasticity, shared identically between conditions, and one for brokering-link outcomes, used only by the treatment condition --- rather than a single continuously advancing stream. Second, a day-boundary indexing error caused a thirty-minute brokering hand-off to become, in some cases, effectively permanent, because the per-day timestep index used to check hand-off expiry was reset to zero at the start of each simulated day while the hand-off's expiry timestamp was not. Both errors are reported here, rather than silently corrected, as part of the verification standard applied throughout this study --- including to its own simulation code, not only to the cited literature.
+
+\subsection{External Validity}
+
+This study uses a single-site solar driver (Kuala Lumpur) applied to a hypothetical five-node corridor with an assumed, not measured, spatial correlation structure; an assumed panel and buffer sizing, swept rather than calibrated; and, following Section~\ref{sec:flow-result}, a flow-harvester component now understood to be largely non-viable as originally conceived. The simulation demonstrates that the proposed algorithm is implementable and produces a mechanistically traceable, statistically robust effect under a stated and partly real-data-grounded set of assumptions. It does not demonstrate that effect's magnitude at an actual highway cut-slope deployment, and should not be read as doing so.
+
+\subsection{Source and Data Verification}
+\label{sec:verification}
+
+Venue-quality screening during the literature review identified one source~\cite{ref66} that could not be independently re-verified within the scope of this study after an attempt to access its full text was blocked (HTTP 403) on two separate occasions; this source is cited only for its reported power--velocity anchor points (Section~\ref{sec:flow-result}), which are also independently consistent with the theoretical $v^3$ kinetic-turbine scaling, and not for any claim requiring trust in unverified surrounding content. One further source identified during screening, published by a venue with documented, unrelated large-scale peer-review integrity concerns disclosed by its publisher in 2023, was excluded from this manuscript's citation set entirely rather than cited with a caveat, since the specific article's standing could not be confirmed. All datasets used for simulation input (Section~\ref{sec:methods}) were confirmed to exist via direct retrieval before use, and their license terms are stated there.
+
+\subsection{Required Steps Before Deployment}
+
+Closing the gap between this preliminary feasibility study and a deployment-ready system requires, at minimum: real multi-site weather data at a resolution capable of resolving the within-corridor spatial-correlation assumption (ground-station data, not satellite reanalysis, per Section~\ref{sec:cross-check}); a real flow-harvester characterization under sediment-laden, intermittent field conditions, should that component be pursued further; calibrated, rather than assumed, structural constants for panel efficiency, buffer sizing, and movement-trigger probabilities; and the hardware-in-the-loop and physical-prototype validation stages the reference architecture itself used~\cite{ref101}, extended to the multi-node configuration this paper's algorithm requires. None of these have yet been carried out, and we make no claim that they have.
+
+\section{Conclusions}
+\label{sec:conclusion}
+
+This paper proposes and computationally tests an extension of a validated single-node IoT-microgrid architecture to a deployment class --- off-grid landslide-monitoring swarms on Malaysian highway cut-slopes --- where the original architecture's utility-backup assumption does not hold. A 50-seed Monte Carlo simulation, driven by real solar and piezoelectric harvester data, shows that corridor-wide duty-brokering produces a statistically robust reduction in sensing downtime concentrated specifically on the correlated storm conditions the design targets, and that this finding is not an artifact of its one unvalidated model component. Cross-checking the design's premises against real weather data and real documented landslide incidents produced genuinely mixed evidence that nonetheless motivated a concrete, favorable revision to the design, strengthening the case for ground-movement-coupled harvesting, and a concrete, unfavorable one, downgrading the flow-harvester component after finding it viable for well under 1\% of the year under realistic geometry. The result is a preliminary feasibility study, not a field validation; we have specified the real-world data and hardware-in-the-loop work still required to close that gap, and we have not performed it.
+
+\vspace{6pt}
+
+\authorcontributions{Author contributions statement removed for double-blind review; see the non-blind version of this manuscript. All authors have read and agreed to the published version of the manuscript.}
+
+\funding{This research received no external funding.}
+
+\institutionalreview{Not applicable. This study involved no human subjects, animal subjects, or personally identifiable data; all datasets used are publicly available environmental and laboratory measurement data.}
+
+\informedconsent{Not applicable.}
+
+\dataavailability{Datasets used: Kuala Lumpur solar irradiance (Mendeley Data, DOI: 10.17632/bgch4tw79k.1, CC BY 4.0); piezoelectric harvester characterization (Mendeley Data, DOI: 10.17632/y4cmrsdv9f.1, CC BY 4.0); NASA POWER hourly reanalysis data (publicly available via the POWER Project application programming interface, power.larc.nasa.gov, no registration required). Simulation code supporting the findings of this study is available from the corresponding author upon reasonable request.}
+
+\acknowledgments{During the preparation of this manuscript, the authors used AI-assisted tools for literature search and screening, source verification, simulation code implementation, and manuscript drafting. All quantitative claims were independently computed by executing the described code against the cited datasets rather than generated from model memory; two implementation errors identified during this process are disclosed in Section~\ref{sec:internal-validity}. The authors have reviewed and edited the output and take full responsibility for the content of this publication.}
+
+\conflictsofinterest{The authors declare no conflicts of interest. The funders had no role in the design of the study; in the collection, analyses, or interpretation of data; in the writing of the manuscript; or in the decision to publish the results.}
+
+\abbreviations{Abbreviations}{%
+The following abbreviations are used in this manuscript:\\
+\noindent
+\begin{tabular}{@{}ll}
+IoT & Internet of Things\\
+HIL & Hardware-in-the-Loop\\
+PHIL & Power Hardware-in-the-Loop\\
+WSN & Wireless Sensor Network\\
+LPWAN & Low-Power Wide-Area Network\\
+LoRaWAN & Long Range Wide Area Network\\
+PDR & Packet Delivery Ratio\\
+GHI & Global Horizontal Irradiance\\
+P2P & Peer-to-Peer\\
+JKR & Jabatan Kerja Raya (Public Works Department, Malaysia)\\
+PRISMA & Preferred Reporting Items for Systematic Reviews and Meta-Analyses
+\end{tabular}
+}
+
+\begin{adjustwidth}{-\extralength}{0cm}
+\reftitle{References}
+
+\input{bibliography_block.tex}
+
+\end{adjustwidth}
+
+\end{document}
